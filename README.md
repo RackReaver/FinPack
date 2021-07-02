@@ -34,27 +34,27 @@ pip install git+github.com/RackReaver/finpack.git
 
 ```
 $ finpack --help
- ______ _       _____           _
-|  ____(_)     |  __ \         | |
-| |__   _ _ __ | |__) |_ _  ___| | __
-|  __| | | '_ \|  ___/ _` |/ __| |/ /
-| |    | | | | | |  | (_| | (__|   <
-|_|    |_|_| |_|_|   \__,_|\___|_|\_\
+  ______ _       _____           _
+ |  ____(_)     |  __ \         | |
+ | |__   _ _ __ | |__) |_ _  ___| | __
+ |  __| | | '_ \|  ___/ _` |/ __| |/ /
+ | |    | | | | | |  | (_| | (__|   <
+ |_|    |_|_| |_|_|   \__,_|\___|_|\_\\
 
 Super simple financial tracking/management tools.
 
 Commands:
-  init  Build sample accounts.yaml file
-  run   Update account values interactively
+    init    Generate sample accounts.yaml file
+    build   Create reports interactively based on accounts.yaml
 
 Usage:
-    finpack init [--filepath=filename] [--overwrite]
-    finpack run [--filepath=filename] [--date=date]
+    finpack init [--filepath=filepath] [--overwrite]
+    finpack build [--filepath=filepath] [--date=date]
 
 Options:
-    --filepath=filename        Location of the account list [default: accounts.yaml]
-    --date=date                Custom date to run against (YYYY-MM-DD). [default: today]
-    --overwrite                Write over existing file
+    --filepath=filepath         Location of the account list [default: accounts.yaml]
+    --overwrite                 Write over existing file
+    --date=date                 Custom date to build report (YYYY-MM-DD). [default: today]
 ```
 
 ### Folder Structure `financials`:

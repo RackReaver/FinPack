@@ -9,17 +9,17 @@
 Super simple financial tracking/management tools.
 
 Commands:
-  init  Build sample accounts.yaml file
-  run   Update account values interactively
+    init    Generate sample accounts.yaml file
+    build   Create reports interactively based on accounts.yaml
 
 Usage:
-    finpack init [--filepath=filename] [--overwrite]
-    finpack run [--filepath=filename] [--date=date]
+    finpack init [--filepath=filepath] [--overwrite]
+    finpack build [--filepath=filepath] [--date=date]
 
 Options:
-    --filepath=filename        Location of the account list [default: accounts.yaml]
-    --date=date                Custom date to run against (YYYY-MM-DD). [default: today]
-    --overwrite                Write over existing file
+    --filepath=filepath         Location of the account list [default: accounts.yaml]
+    --overwrite                 Write over existing file
+    --date=date                 Custom date to build report (YYYY-MM-DD). [default: today]
 """
 __copyright__ = "Copyright (C) 2021  Matt Ferreira"
 __license__ = "Apache License"
@@ -72,7 +72,7 @@ def main():
             },
             "liabilities": {
                 "Short-Term Credit": {
-                    "Short-Term Credit": ['Credit Card 1', 'Credit Card 2'],
+                    "Credit Cards": ['Credit Card 1', 'Credit Card 2'],
                     "Loans and Mortgages": ['Primary Residence', 'Investment Property', 'Student Loan 1', 'Student Loan 2'],
                     "Other Liabilities": ['Other 1', 'Other 2']
                 },
@@ -97,7 +97,7 @@ def main():
         else:
             write_file()
 
-    elif args['run']:
+    elif args['build']:
         # Build/Check date
         if args['--date'] == 'today':
             args['--date'] = datetime.now().strftime('%Y-%m-%d')
@@ -108,4 +108,4 @@ def main():
                 print(
                     "\n'{}' does not match format 'YYYY-MM-DD'\n".format(args['--date']))
 
-        app.main()
+        app.main(args)
