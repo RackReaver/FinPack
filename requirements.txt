@@ -1,0 +1,6 @@
+autopep8==1.5.7
+docopt==0.6.2
+isort==5.9.1
+pycodestyle==2.7.0
+PyYAML==5.4.1
+toml==0.10.2
