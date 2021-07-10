@@ -72,9 +72,9 @@ financials/
 | Types        | Description                                                    |
 | ------------ | -------------------------------------------------------------- |
 | root_type    | Pre-determined values (assets, liabilities, incomes, expenses) |
-| category     | Determined and configured by user (exampes below)              |
-| sub_category | Determined and configured by user (exampes below)              |
-| account      | Determined and configured by user (exampes below)              |
+| category     | Determined and configured by user (examples below)             |
+| sub_category | Determined and configured by user (examples below)             |
+| account      | Determined and configured by user (examples below)             |
 
 ```
 assets:
@@ -124,7 +124,7 @@ assets:
     Real Estate:
       - Primary Residence
       - Investment Property
-    Jewlery, Watches and Luxury Goods:
+    Jewelry, Watches and Luxury Goods:
       - Tag Heuer Watch
       - Gold Chain
     Vehicles:
