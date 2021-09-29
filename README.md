@@ -1,15 +1,12 @@
 # FinPack
 
-Super simple financial tracking/management tools.
+Super simple financial tracking and management tools.
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Running Tests and Checking Coverage](#running-tests-and-checking-coverage)
 - [How to Use](#how-to-use)
-  - [Folder Structure](#folder-structure-financials)
-  - [Accounts YAML File Structure](#accounts-yaml-file-structure)
-  - [Example Accounts YAML File](#example-accounts-yaml-file-accountsyaml)
 - [ToDo](#to-dos)
 - [Authors](#authors)
 - [License](#license)
@@ -33,7 +30,6 @@ pip install git+github.com/RackReaver/finpack.git
 ## How To Use
 
 ```
-$ finpack --help
   ______ _       _____           _
  |  ____(_)     |  __ \         | |
  | |__   _ _ __ | |__) |_ _  ___| | __
@@ -41,132 +37,11 @@ $ finpack --help
  | |    | | | | | |  | (_| | (__|   <
  |_|    |_|_| |_|_|   \__,_|\___|_|\_\\
 
-Super simple financial tracking/management tools.
-
-Commands:
-    init    Generate sample accounts.yaml file
-    build   Create reports interactively based on accounts.yaml
-
-Usage:
-    finpack init [--filepath=filepath] [--overwrite]
-    finpack build [--filepath=filepath] [--date=date]
-
-Options:
-    --filepath=filepath         Location of the account list [default: accounts.yaml]
-    --overwrite                 Write over existing file
-    --date=date                 Custom date to build report (YYYY-MM-DD). [default: today]
-```
-
-### Folder Structure `financials`:
-
-```
-financials/
-|
-+-- accounts.yaml   # Contains current account names
-+-- data.json       # Historical data (auto-generated)
-
-```
-
-### Accounts YAML File Structure:
-
-| Types        | Description                                                    |
-| ------------ | -------------------------------------------------------------- |
-| root_type    | Pre-determined values (assets, liabilities, incomes, expenses) |
-| category     | Determined and configured by user (examples below)             |
-| sub_category | Determined and configured by user (examples below)             |
-| account      | Determined and configured by user (examples below)             |
-
-```
-assets:
-^  Cash and Cash Equivalents:
-|  ^  Cash:
-|  |  ^ - Wallet
-|  |  |   ^
-|  |  |   |
-|  |  |   +-- account
-|  |  |
-|  |  +------ sub_category
-|  |
-|  +--------- category
-|
-+------------ root_type
-```
-
-### Example Accounts YAML File `accounts.yaml`:
-
-```
-assets:
-  Cash and Cash Equivalents:
-    Cash:
-      - Wallet
-    Checking Accounts:
-      - Bank of America
-      - Chase
-      - Charles Schwab
-    Savings Accounts:
-      - Bank of America (Cash Reserve)
-    Other:
-      - Paypal
-      - Venmo
-  Taxable Accounts:
-    Brokerage Accounts:
-      - Robinhood
-      - Coinbase
-    Online Funds:
-      - Fundrise
-      - Lending Club
-  Tax-Advantaged Accounts (Retirement Accounts):
-    401(k)s:
-      - Vanguard
-    IRAs:
-      - Fidelity (Roth IRA)
-  Property:
-    Real Estate:
-      - Primary Residence
-      - Investment Property
-    Jewelry, Watches and Luxury Goods:
-      - Tag Heuer Watch
-      - Gold Chain
-    Vehicles:
-      - Primary Car
-      - Recreational Car
-  Other Assets:
-    Life Insurance:
-      - MassMutual Cash Value
-    Monies Owed:
-      - Parents
-      - Friend
-liabilities:
-  Short-Term Credit:
-    Short-Term Credit:
-      - Credit Card 1
-      - Credit Card 2
-    Loans and Mortgages:
-      - Primary Residence
-      - Investment Property
-      - Student Loan 1
-      - Student Loan 2
-    Other Liabilities:
-      - Other 1
-      - Other 2
-  Loans and Mortgages:
-    Real Estate:
-      - Primary Residence
-      - Investment Property
-    Student Loans:
-      - Student Loan 1
-      - Student Loan 2
-    Auto Loans:
-      - Primary Car
-      - Recreational Car
 ```
 
 ## To-Dos
 
-- [] Build app models
-- [] Generate a model that allows for multi-level accounts
-- [] Accept .yaml format
-- [] Accept .json format
+- [] TBA
 
 ## Authors
 
