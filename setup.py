@@ -17,7 +17,7 @@ with open('finpack/VERSION') as version_file:
     version = version_file.read().strip()
 assert isinstance(version, str)
 
-install_requirements = ['pyyaml']
+install_requirements = []
 
 setup(name='finpack',
       version=version,
@@ -27,12 +27,7 @@ setup(name='finpack',
       license='Apache License',
       author='Matt Ferreira',
       author_email='rackreaver@gmail.com',
-    #   download_url='https://github.com/RackReaver/FinPack',
+      download_url='https://github.com/RackReaver/FinPack',
       install_requires=install_requirements,
-      packages=find_packages(),
-      entry_points={
-          'console_scripts': [
-              'finpack = finpack.core.cli:main'
-          ]
-      }
+      packages=find_packages()
       )
