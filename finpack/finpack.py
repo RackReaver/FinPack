@@ -18,7 +18,7 @@ class Account():
         self.history = history
 
     def __repr__(self):
-        return '<Account.' + self.name + '>'
+        return '<Account.' + self.type + '.' + self.name.replace(' ', '-') + '>'
 
     def __eq__(self, other):
         return self.name == other
