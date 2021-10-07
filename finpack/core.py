@@ -4,6 +4,9 @@ __copyright__ = "Copyright (C) 2021  Matt Ferreira"
 __license__ = "Apache License"
 
 import csv
+from datetime import datetime
+
+from finpack import utils
 
 class DataError(Exception):
     pass
@@ -11,17 +14,35 @@ class DataError(Exception):
 class Account():
     def __init__(self, name, type, category, sub_category, description, history):
         self.name = name
+        self.short_name = name[:40]
         self.type = type
         self.category = category
         self.sub_category = sub_category
         self.description = description
         self.history = history
+        
+        if len(self.name) > 40:
+            self.short_name = name[:37] + '...'
 
     def __repr__(self):
         return '<Account.' + self.type + '.' + self.name.replace(' ', '-') + '>'
 
     def __eq__(self, other):
         return ' '.join([self.type, self.name]) == other
+
+    def current_value(self):
+        """Get latest monetary value of account.
+        """
+        first = True
+        for val in self.history:
+            if first == True:
+                value = val
+                first = False
+            else:
+                if val[0] > value[0]:
+                    value = val
+
+        return value[1]
 
 
 def importer(filepath, header=True):
@@ -47,7 +68,7 @@ def importer(filepath, header=True):
 
             ignore = ['name', 'type', 'category', 'sub_category', 'description']
             # Parse out only financial data
-            data = [x for x in row.items() if x[0] not in ignore]
+            data = [[x[0], x[1].replace(',', '')] for x in row.items() if x[0] not in ignore]
 
             # Add account to accounts list
             accounts.append(Account(
