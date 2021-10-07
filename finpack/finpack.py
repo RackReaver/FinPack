@@ -21,7 +21,7 @@ class Account():
         return '<Account.' + self.type + '.' + self.name.replace(' ', '-') + '>'
 
     def __eq__(self, other):
-        return self.name == other
+        return ' '.join([self.type, self.name]) == other
 
 
 def importer(filepath, header=True):
@@ -42,7 +42,7 @@ def importer(filepath, header=True):
         for row in r:
 
             # Check if account name already exists
-            if row['name'] in accounts:
+            if ' '.join([row['type'], row['name']]) in accounts:
                 raise DataError('Account names must be unique')
 
             ignore = ['name', 'type', 'category', 'sub_category', 'description']
