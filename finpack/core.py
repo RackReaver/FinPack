@@ -81,3 +81,23 @@ def importer(filepath, header=True):
                                 ))
 
     return accounts
+
+def balsheet(data, date):
+    """Build balance sheet
+    
+    args:
+        data (list): data from importer
+        date (datetime): date in datetime format
+    """
+    # TODO: Build Balance Sheet Report Function
+    pass
+
+def cashflow(data):
+    """Build cashflow statement"""
+    # TODO: Build Cash Flow Report Function
+    pass
+
+def allocation(data):
+    """Build asset and liability allocation"""
+    # TODO: Build Allocation Report Function
+    pass    
