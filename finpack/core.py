@@ -12,6 +12,10 @@ class DataError(Exception):
     """Data not provided or available as expected."""
     pass
 
+class AccountError(Exception):
+    """Account class exception"""
+    pass
+
 class Account():
     def __init__(self, name, type, category, sub_category, description, history):
         self.name = name
@@ -44,6 +48,35 @@ class Account():
                     value = val
 
         return value[1]
+    
+    def add_value(self, value, date=datetime.now()):
+        """
+        
+        args:
+            value (int|float): Account value
+
+        kwargs:
+            date (datetime): date that is to be used
+
+        return (bool): True/False based on success
+        """
+
+        if not isinstance(value, (float, int)):
+            # If type is int convert it to float
+            if type(value) == int:
+                value = float(value)
+            else:
+                raise DataError('Wrong variable type passed to function, "value" should be a float or int not {}'.format(type(value).__name__))
+        if not isinstance(date, datetime):
+            raise DataError('Wrong variable type passed to function, "date" should be a datetime not {}'.format(type(date).__name__))
+
+        # Verify date value does not exist
+        if date not in [x[0] for x in self.history]:
+            self.history.append([date, "{:,.2f}".format(value)])
+        else:
+            # TODO: Prompt to overwrite and allow for auto overwrite.
+            raise AccountError('Date value already exists')
+
 
 
 def importer(filepath, header=True):
