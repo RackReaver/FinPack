@@ -9,6 +9,7 @@ from datetime import datetime
 from finpack import utils
 
 class DataError(Exception):
+    """Data not provided or available as expected."""
     pass
 
 class Account():
