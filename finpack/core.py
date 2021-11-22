@@ -6,6 +6,7 @@ __license__ = "Apache License"
 import csv
 from datetime import datetime
 
+from finpack.reports.balsheet import BalanceSheet
 from finpack import utils
 
 
@@ -132,15 +133,19 @@ def importer(filepath, header=True):
     return accounts
 
 
-def balsheet(data, date):
+def balsheet(data, date, level):
     """Build balance sheet
 
     args:
         data (list): data from importer
-        date (datetime): date in datetime format
+        TODO: date (datetime): date in datetime format
+        level (int):    1: Categories
+                        2: Categories + Sub-categories
+                        3: Categories + Sub-categories + accounts
+
+    return (str): Balance Sheet
     """
-    # TODO: Build Balance Sheet Report Function
-    pass
+    return BalanceSheet(data).build(levels=level)
 
 
 def cashflow(data):
