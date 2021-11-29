@@ -26,7 +26,7 @@ class Account:
     def __init__(self, name, type, category, sub_category, description, history):
         self.name = name
         self.short_name = name[:40]
-        self.type = type
+        self.type = type.lower()
         self.category = category
         self.sub_category = sub_category
         self.description = description
