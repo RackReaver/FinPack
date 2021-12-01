@@ -42,7 +42,10 @@ class Account:
         return " ".join([self.type, self.name]) == other
 
     def current_value(self):
-        """Get latest monetary value of account."""
+        """Get latest monetary value of account.
+
+        return (str): Monetary value
+        """
         first = True
         for val in self.history:
             if first == True:
