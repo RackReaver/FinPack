@@ -69,16 +69,18 @@ class Account:
         return (bool): True/False based on success
         """
 
-        if not isinstance(value, (float, int)):
-            # If type is int convert it to float
-            if type(value) == int:
-                value = float(value)
-            else:
-                raise DataError(
-                    'Wrong variable type passed to function, "value" should be a float or int not {}'.format(
-                        type(value).__name__
-                    )
+        # If type is int convert it to float
+        if isinstance(value, int):
+            value = float(value)
+
+        # If 'value' type not float raise error
+        if not isinstance(value, float):
+            raise DataError(
+                'Wrong variable type passed to function, "value" should be a float or int not {}'.format(
+                    type(value).__name__
                 )
+            )
+        # If type is not datetime raise error
         if not isinstance(date, datetime):
             raise DataError(
                 'Wrong variable type passed to function, "date" should be a datetime not {}'.format(
@@ -86,12 +88,18 @@ class Account:
                 )
             )
 
+        # Convert datetime to str
+        date = date.strftime("%Y-%m-%d")
+
         # Verify date value does not exist
         if date not in [x[0] for x in self.history]:
-            self.history.append([date, "{:,.2f}".format(value)])
+            self.history.append([date, "{:.2f}".format(value)])
+
         else:
             # TODO: Prompt to overwrite and allow for auto overwrite.
             raise AccountError("Date value already exists")
+
+        return True
 
 
 def importer(filepath, header=True):
