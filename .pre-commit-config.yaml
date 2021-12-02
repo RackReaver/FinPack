@@ -9,11 +9,11 @@ repos:
       - id: check-docstring-first
       - id: requirements-txt-fixer
   - repo: https://github.com/PyCQA/isort
-    rev: 5.5.2
+    rev: 5.10.1
     hooks:
       - id: isort
   - repo: https://github.com/psf/black
-    rev: stable
+    rev: 21.11b1
     hooks:
       - id: black
   - repo: https://github.com/PyCQA/flake8
