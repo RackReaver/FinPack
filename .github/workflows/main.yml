@@ -19,7 +19,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - run: python -m pip install poetry
-      - run: poetry install --no-interaction
+      - run: poetry install --no-interaction --no-root
       - run: poetry run coverage run -m pytest
       - run: poetry run isort --diff .
       - run: poetry run black --check .
