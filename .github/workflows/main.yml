@@ -1,5 +1,5 @@
 # .github/workflows/main.yml
-name: Tests
+name: Python Workflow
 
 on: [push, pull_request, workflow_dispatch]
 
