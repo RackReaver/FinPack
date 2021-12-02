@@ -19,7 +19,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - run: python -m pip install coverage pytest isort black mypy
-      - run: python -m coverage run -m pytest tests.py
+      - run: python -m coverage run -m pytest
       - run: python -m isort --diff .
       - run: python -m black --check .
       - run: python -m mypy -p finpack
