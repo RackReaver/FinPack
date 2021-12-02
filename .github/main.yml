@@ -1,4 +1,4 @@
-# .github/workflows/tests.yml
+# .github/workflows/main.yml
 name: Tests
 
 on: [push, pull_request, workflow_dispatch]
