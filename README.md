@@ -9,7 +9,6 @@ Super simple financial tracking and management tools.
 - [How to Use](#how-to-use)
 - [ToDo](#to-dos)
 - [Authors](#authors)
-- [License](#license)
 
 ## Installation
 
@@ -52,7 +51,3 @@ $ coverage report
 ## Authors
 
 - **Matt Ferreira** - _Developer_ - [RackReaver](https://github.com/RackReaver)
-
-## License
-
-This project is licensed under the Apache License - see the [LICENSE](LICENSE) file for details
