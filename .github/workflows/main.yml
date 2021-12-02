@@ -7,14 +7,8 @@ jobs:
   linting:
     runs-on: ubuntu-latest
     steps:
-      #----------------------------------------------
-      #       check-out repo and set-up python
-      #----------------------------------------------
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      #----------------------------------------------
-      #          install and run linters
-      #----------------------------------------------
       - run: python -m pip install black isort
       - run: |
           black . --check
@@ -22,15 +16,12 @@ jobs:
   test:
     needs: linting
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
     runs-on: ${{ matrix.os }}
     steps:
-      #----------------------------------------------
-      #       check-out repo and set-up python
-      #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Set up python ${{ matrix.python-version }}
@@ -38,24 +29,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
-      #----------------------------------------------
-      #  -----  install & configure poetry  -----
-      #----------------------------------------------
       - name: Install Poetry
-        run: python -m pip install poetry
-      #----------------------------------------------
-      # install dependencies if cache does not exist
-      #----------------------------------------------
+      - run: |
+          python -m ensurepip
+          python -m pip install --upgrade pip
+          python -m pip install poetry==${{ matrix.poetry-version }}
       - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root
-      #----------------------------------------------
-      # install your root project, if required
-      #----------------------------------------------
-      - name: Install library
-        run: poetry install --no-interaction
-      #----------------------------------------------
-      #    add matrix specifics and run test suite
-      #----------------------------------------------
-      - name: Run tests
-        run: poetry run coverage run -m pytest
+        shell: bash
+        run: python -m poetry install
+      - name: Run tests with pytest
+        run: python -m poetry run coverage run -m pytest
