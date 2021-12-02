@@ -21,10 +21,16 @@ pip install git+github.com/RackReaver/finpack.git
 
 ## Running Tests and Checking Coverage
 
+### Run tests and check for test coverage
+
 ```
->>> coverage run -m pytest
->>>
->>> coverage report
+$ coverage run -m pytest
+```
+
+### Show test coverage
+
+```
+$ coverage report
 ```
 
 ## How To Use
