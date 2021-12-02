@@ -18,8 +18,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
-      - run: python -m pip install coverage pytest isort black mypy
-      - run: python -m coverage run -m pytest
-      - run: python -m isort --diff .
-      - run: python -m black --check .
-      - run: python -m mypy -p finpack
+      - run: python -m pip install poetry
+      - run: python -m poetry install
+        run: python -m poetry run coverage run -m pytest
+      - run: python -m poetry run isort --diff .
+      - run: python -m poetry run black --check .
+      - run: python -m poetry run mypy -p finpack
