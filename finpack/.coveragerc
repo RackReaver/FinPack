@@ -1,0 +1,8 @@
+coverage run -m pytest
+coverage report -m
+
+[run]
+branch=True
+
+[report]
+show_missing=True
