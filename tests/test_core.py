@@ -2,7 +2,7 @@ import os
 import unittest
 from datetime import datetime
 
-from finpack.core import Account, AccountError, DataError, balsheet, importer
+from finpack.core import Account, AccountError, DataError, importer
 
 NAME = "The only Checking Account you will ever need"
 TYPE = "asset"
@@ -13,8 +13,6 @@ HISTORY = [["2021-01-01", "1000.00"], ["2021-12-01", "2000.00"]]
 
 
 class TestCore(unittest.TestCase):
-    
-    
     def setUp(self):
         self.DATA_DIR = "temp"
         self.DATA = self.DATA_DIR + "/data.csv"
@@ -30,18 +28,27 @@ class TestCore(unittest.TestCase):
 
         os.mkdir(self.DATA_DIR)
         with open(self.DATA, "w") as openFile:
-            openFile.write("name,type,category,sub_category,description,2021-01-01,2021-12-01\n")
-            openFile.write("Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00")
+            openFile.write(
+                "name,type,category,sub_category,description,2021-01-01,2021-12-01\n"
+            )
+            openFile.write(
+                "Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00"
+            )
         with open(self.BROKEN_DATA, "w") as openFile:
-            openFile.write("name,type,category,sub_category,description,2021-01-01,2021-12-01\n")
-            openFile.write("Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00\n")
-            openFile.write("Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00\n")
+            openFile.write(
+                "name,type,category,sub_category,description,2021-01-01,2021-12-01\n"
+            )
+            openFile.write(
+                "Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00\n"
+            )
+            openFile.write(
+                "Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00\n"
+            )
 
     def tearDown(self):
         os.remove(self.DATA)
         os.remove(self.BROKEN_DATA)
         os.rmdir(self.DATA_DIR)
-
 
     def test_account_name(self):
         self.assertEqual(self.account.name, NAME)
@@ -102,6 +109,7 @@ class TestCore(unittest.TestCase):
     def test_importer_broken_data(self):
         with self.assertRaises(DataError):
             importer(self.BROKEN_DATA)
+
 
 # if __name__ == "__main__":
 #     unittest.main()
