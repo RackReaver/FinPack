@@ -1,7 +1,8 @@
+import os
 import unittest
 from datetime import datetime
 
-from finpack.core import Account, AccountError, DataError
+from finpack.core import Account, AccountError, DataError, balsheet, importer
 
 NAME = "The only Checking Account you will ever need"
 TYPE = "asset"
@@ -12,7 +13,12 @@ HISTORY = [["2021-01-01", "1000.00"], ["2021-12-01", "2000.00"]]
 
 
 class TestCore(unittest.TestCase):
+    
+    
     def setUp(self):
+        self.DATA_DIR = "temp"
+        self.DATA = self.DATA_DIR + "/data.csv"
+        self.BROKEN_DATA = self.DATA_DIR + "/broken_data.csv"
         self.account = Account(
             NAME,
             TYPE,
@@ -21,6 +27,21 @@ class TestCore(unittest.TestCase):
             DESCRIPTION,
             HISTORY,
         )
+
+        os.mkdir(self.DATA_DIR)
+        with open(self.DATA, "w") as openFile:
+            openFile.write("name,type,category,sub_category,description,2021-01-01,2021-12-01\n")
+            openFile.write("Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00")
+        with open(self.BROKEN_DATA, "w") as openFile:
+            openFile.write("name,type,category,sub_category,description,2021-01-01,2021-12-01\n")
+            openFile.write("Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00\n")
+            openFile.write("Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00\n")
+
+    def tearDown(self):
+        os.remove(self.DATA)
+        os.remove(self.BROKEN_DATA)
+        os.rmdir(self.DATA_DIR)
+
 
     def test_account_name(self):
         self.assertEqual(self.account.name, NAME)
@@ -74,6 +95,13 @@ class TestCore(unittest.TestCase):
         with self.assertRaises(AccountError):
             self.account.add_value(3000, date=datetime(2021, 1, 1))
 
+    def test_importer_data(self):
+        data = importer(self.DATA, header=True)
+        self.assertAlmostEqual(data[0].name, "Checking 1")
+
+    def test_importer_broken_data(self):
+        with self.assertRaises(DataError):
+            importer(self.BROKEN_DATA)
 
 # if __name__ == "__main__":
 #     unittest.main()
