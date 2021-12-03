@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
+        python-version: ["3.9", "3.10"]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository
@@ -31,13 +31,11 @@ jobs:
           architecture: x64
       - name: Install Poetry
         run: |
-          python -m ensurepip
           python -m pip install --upgrade pip
           python -m pip install poetry
       - name: Install dependencies
         shell: bash
         run: |
-          python -m poetry env use python${{ matrix.python-version }}
           python -m poetry install
       - name: Run tests with pytest
         run: python -m poetry run coverage run -m pytest
