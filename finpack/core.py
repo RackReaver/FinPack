@@ -6,8 +6,8 @@ __license__ = "Apache License"
 import csv
 from datetime import datetime
 
-from finpack.reports.balsheet import BalanceSheet
 from finpack import utils
+from finpack.reports.balsheet import BalanceSheet
 
 
 class DataError(Exception):
@@ -119,9 +119,17 @@ def importer(filepath, header=True):
         # Loop through all rows
         for row in r:
 
+            # Skip row if name and type are blank
+            if row["name"] == "" and row["type"] == "":
+                break
+
             # Check if account name already exists
             if " ".join([row["type"], row["name"]]) in accounts:
-                raise DataError("Account names must be unique")
+                raise DataError(
+                    "Account names must be unique if same type, '{}' is duplicated.".format(
+                        row["name"]
+                    )
+                )
 
             ignore = ["name", "type", "category", "sub_category", "description"]
             # Parse out only financial data
