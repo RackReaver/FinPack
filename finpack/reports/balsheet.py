@@ -48,7 +48,7 @@ class BalanceSheet:
 
     def build(self, levels=3):
         # TODO: Dynamic tabbing needs to be added for levels 1 and 2. Not required for levels 3.
-        # TODO: Allow for date specific balance sheets
+        # TODO: GH-#1 - Allow for date specific balance sheets
         data_export = {
             "assets": {"str": self._build_title("Assets"), "total": 0.00},
             "liabilities": {"str": self._build_title("Liabilities"), "total": 0.00},

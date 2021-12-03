@@ -169,11 +169,11 @@ def balsheet(data, date, level):
 
 def cashflow(data):
     """Build cashflow statement"""
-    # TODO: Build Cash Flow Report Function
+    # TODO: GH-#4 - Build Cash Flow Report Function
     pass
 
 
 def allocation(data):
     """Build asset and liability allocation"""
-    # TODO: Build Allocation Report Function
+    # TODO: GH-#5 Build Allocation Report Function
     pass
