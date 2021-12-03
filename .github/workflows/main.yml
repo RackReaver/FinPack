@@ -37,5 +37,5 @@ jobs:
         shell: bash
         run: |
           python -m poetry install
-      - name: Run tests with pytest
-        run: python -m poetry run coverage run -m pytest
+      - name: Run tests and check coverage
+        run: python -m poetry run pytest -v --cov
