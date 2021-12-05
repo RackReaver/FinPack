@@ -6,7 +6,7 @@ Super simple personal finance tracking/management tools.
 
 Build balance sheets and cashflow statements.
 
-Chart net worth, asset allocation, your financial independence trajectory and much more.
+Chart your net worth, asset allocation, financial independence trajectory and much more.
 
 ---
 
