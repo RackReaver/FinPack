@@ -1,7 +1,6 @@
 """FinPack
 """
-__copyright__ = "Copyright (C) 2021  Matt Ferreira"
-__license__ = "Apache License"
+__copyright__ = "Copyright (C) 2021 Matt Ferreira"
 
 import csv
 from datetime import datetime

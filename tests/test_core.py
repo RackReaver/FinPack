@@ -1,3 +1,7 @@
+"""Contains tests for finpack/core.py
+"""
+__copyright__ = "Copyright (C) 2021 Matt Ferreira"
+
 import os
 import unittest
 from datetime import datetime
