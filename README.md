@@ -33,7 +33,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Running Tests and Checking Coverage
 
-Tests are created using unittest but are run with pytest (ensure you follow the [installation](#installation) steps before running tests and checking test coverage):
+Tests are created using unittest but are run with pytest (ensure you follow the [Installation (for development)](#installation-for-development) steps before running tests and checking test coverage):
 
 ```
 $ poetry run pytest -v --cov
