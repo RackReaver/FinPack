@@ -4,8 +4,12 @@ version = "0.1.0"
 description = "Super simple financial tracking and management tools."
 authors = ["rackreaver <rackreaver@gmail.com>"]
 
+[tool.poetry.scripts]
+finpack = 'finpack.cli:main'
+
 [tool.poetry.dependencies]
 python = "^3.9"
+docopt = "^0.6.2"
 
 [tool.poetry.dev-dependencies]
 black = "^21.11b1"
