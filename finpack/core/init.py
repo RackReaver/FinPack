@@ -6,19 +6,18 @@ import os
 from datetime import datetime
 
 
-def init(filepath, filename="data", sample_dataset=False, force_overwrite=False):
+def init(filepath="data.csv", sample_dataset=False, force_overwrite=False):
     """Build boilerplate with or without sample dataset.
 
     args:
-        filepath (str): Location to create CSV.
-        filename (str): [default: data] Name of the csv file to be saved NO extension.
+        filepath (str): Location and name of file.
     kwargs:
         sample_dataset (bool): If sample data should be included.
         force_overwrite (bool): If true, don't prompt before overwriting file.
 
     return (bool): True if created successfully.
     """
-    filepath = filepath.replace("\\", "/").strip()
+    filepath = str(filepath).replace("\\", "/").strip()
 
     data = "name,type,category,sub_category,description,{}".format(
         datetime.now().strftime("%Y-%m-%d")
@@ -37,14 +36,14 @@ def init(filepath, filename="data", sample_dataset=False, force_overwrite=False)
         data += "\nStudent Loan 2,liability,Loans and Mortgages,Student Loans,,10000.00"
 
     def write_file():
-        with open(filepath + filename + ".csv", "w") as openfile:
+        with open(filepath, "w") as openfile:
             openfile.write(data)
 
-    if not os.path.isfile(filepath + filename + ".csv") or force_overwrite == True:
+    if not os.path.isfile(filepath) or force_overwrite == True:
         write_file()
     else:
         while True:
-            user_input = input("File already exists, overwrite it (y/n? ")
+            user_input = input("File already exists, overwrite it (y/n)? ")
             if user_input == "Y" or user_input == "y":
                 write_file()
                 break
