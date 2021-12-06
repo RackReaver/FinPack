@@ -6,7 +6,9 @@ import os
 import unittest
 from datetime import datetime
 
-from finpack.core import Account, AccountError, DataError, importer
+from finpack.core.models import Account
+from finpack.core.exceptions import AccountError, DataError
+from finpack.core.loader import loader
 
 NAME = "The only Checking Account you will ever need"
 TYPE = "asset"
@@ -106,13 +108,13 @@ class TestCore(unittest.TestCase):
         with self.assertRaises(AccountError):
             self.account.add_value(3000, date=datetime(2021, 1, 1))
 
-    def test_importer_data(self):
-        data = importer(self.DATA, header=True)
+    def test_loader_data(self):
+        data = loader(self.DATA, header=True)
         self.assertAlmostEqual(data[0].name, "Checking 1")
 
-    def test_importer_broken_data(self):
+    def test_loader_broken_data(self):
         with self.assertRaises(DataError):
-            importer(self.BROKEN_DATA)
+            loader(self.BROKEN_DATA)
 
 
 # if __name__ == "__main__":
