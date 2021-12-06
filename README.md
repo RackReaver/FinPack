@@ -13,9 +13,13 @@ Chart your net worth, asset allocation, financial independence trajectory and mu
 ## Table of Contents
 
 - [Installation](#installation-for-development)
-- [Tests/Coverage](#running-tests-and-checking-coverage)
+- [Running Tests and Checking Coverage](#running-tests-and-checking-coverage)
 - [Deployment](#deployment)
 - [How to Use](#how-to-use)
+  - [Generating the boilerplate data.csv](#generating-the-boilerplate-datacsv)
+  - [Manually adding data to data.csv](#manually-adding-data-to-datacsv)
+  - [Account Structure in data.csv](#account-structure-in-datacsv)
+  - [Example CSV](#example-csv)
 - [Contributing](#contributing)
 - [Versioning](#versioning)
 - [Authors](#authors)
@@ -49,8 +53,6 @@ pip install git+github.com/RackReaver/finpack.git
 
 ## How To Use
 
-TBA, the command line interface has not yet been created.
-
 ```
   ______ _       _____           _
  |  ____(_)     |  __ \         | |
@@ -58,7 +60,76 @@ TBA, the command line interface has not yet been created.
  |  __| | | '_ \|  ___/ _` |/ __| |/ /
  | |    | | | | | |  | (_| | (__|   <
  |_|    |_|_| |_|_|   \__,_|\___|_|\_\\
+
+Super simple personal finance tracking/management tools.
+
+Commands:
+    init        Generate sample accounts.yaml file
+    balsheet    Outputs balance sheet to terminal
+
+Usage:
+    finpack init [--filepath=filepath] [--sample-dataset] [--overwrite]
+    finpack balsheet [--filepath=filepath] [--levels=level] [--date=date]
+    finpack (--version | --help | -h)
+
+Options:
+    --filepath=filepath         Location of the account list. [default: data.csv]
+    --levels=level              How deep of a breakdown on the report [default: 3]
+                                    1 Categories
+                                    2 Categories + Sub-categories
+                                    3 Categories + Sub-categories + accounts
+    --overwrite                 Write over existing file
+    --date=date                 Custom date to build report (YYYY-MM-DD) [default: today]
+    -v --version                Display installed version
+    -h --help                   Show available commands
 ```
+
+### Generating the boilerplate data.csv:
+
+The following will generate `data.csv`.
+
+```
+finpack init
+
+or
+
+finpack init --filepath=data.csv
+```
+
+### Manually adding data to `data.csv`:
+
+Data can be added manually to this csv file as long as you follow these standards:
+
+- Duplicate account names are only permitted if account types are different
+- Account types are always lowercase
+- Dates are always formatted `YYYY-MM-DD`
+
+### Account Structure in `data.csv`:
+
+| Types        | Description                                                         |
+| ------------ | ------------------------------------------------------------------- |
+| account      | Determined and configured by user (examples below)                  |
+| type         | Pre-determined values (assets, liabilities, incomes, expenses)      |
+| category     | Determined and configured by user (examples below)                  |
+| sub_category | Determined and configured by user (examples below)                  |
+| description  | Determined and configured by user, best for supplement account data |
+
+### Example CSV:
+
+This is an example print out of what `finpack init --sample-dataset` will output to `data.csv`
+
+`YYYY-MM-DD` is set dynamically when using `finpack init` and will be the current date.
+
+| account                    | type      | category                  | sub_category     | description | YYYY-MM-DD |
+| -------------------------- | --------- | ------------------------- | ---------------- | ----------- | ---------- |
+| Checking Account 1         | asset     | Cash and Cash Equivalents | Checking Account |             | 1000.00    |
+| Checking Account 2         | asset     | Cash and Cash Equivalents | Checking Account |             | 2000.00    |
+| Savings Account 1          | asset     | Cash and Cash Equivalents | Savings Account  |             | 5000.00    |
+| Retirement Savings Account | asset     | Retirement Accounts       | 401(k)s          |             | 20000.00   |
+| 123 Main St.               | asset     | Property                  | Real Estate      |             | 200000.00  |
+| 123 Main St.               | liability | Loans and Mortgages       | Mortgages        |             | 150000.00  |
+| Student Loan 1             | liability | Loans and Mortgages       | Student Loans    |             | 10000.00   |
+| Student Loan 2             | liability | Loans and Mortgages       | Student Loans    |             | 10000.00   |
 
 ## Contributing
 
