@@ -1,4 +1,4 @@
-"""Build boilerplate with or without sample dataset
+"""Build boilerplate with or without sample dataset.
 """
 __copyright__ = "Copyright (C) 2021 Matt Ferreira"
 
