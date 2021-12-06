@@ -198,15 +198,17 @@ def init(filepath, filename="data", sample_dataset=False, force_overwrite=False)
                 break
 
 
-def balsheet(data, date, level):
+def balsheet(data, date, level=3):
     """Build balance sheet
 
     args:
         data (list): data from importer
         TODO: date (datetime): date in datetime format
-        level (int):    1: Categories
-                        2: Categories + Sub-categories
-                        3: Categories + Sub-categories + accounts
+    kwargs:
+        level (int): [default: 3]
+                1: Categories
+                2: Categories + Sub-categories
+                3: Categories + Sub-categories + accounts
 
     return (str): Balance Sheet
     """
