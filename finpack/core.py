@@ -152,6 +152,20 @@ def importer(filepath, header=True):
     return accounts
 
 
+def init(filepath, sample_dataset=False):
+    """Build boilerplate with or without sample dataset.
+    
+    args:
+        filepath (str): Location to create CSV.
+    kwargs:
+        sample_dataset (bool): If sample data should be included.
+
+    return (bool): True if created successfully.
+    """
+
+    pass
+
+
 def balsheet(data, date, level):
     """Build balance sheet
 
