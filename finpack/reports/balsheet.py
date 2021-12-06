@@ -1,6 +1,6 @@
 """Class for building custom balance sheets.
 """
-__copyright__ = "Copyright (C) 2021  Matt Ferreira"
+__copyright__ = "Copyright (C) 2021 Matt Ferreira"
 
 from finpack.utils import _add_char
 

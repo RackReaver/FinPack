@@ -1,7 +1,6 @@
 """Python module/package configuration file.
 """
-__copyright__ = "Copyright (C) 2020  Matt Ferreira"
-__license__ = "Apache License"
+__copyright__ = "Copyright (C) 2021 Matt Ferreira"
 
 # Read the contents of your README file
 from os import path

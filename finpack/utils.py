@@ -1,3 +1,8 @@
+"""Code used accross the code base but not directly related to any single file.
+"""
+__copyright__ = "Copyright (C) 2021 Matt Ferreira"
+
+
 def _add_char(num, char=" "):
     """Creates a string value give a number and character.
     args:
