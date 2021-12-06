@@ -5,7 +5,7 @@ description = "Super simple financial tracking and management tools."
 authors = ["rackreaver <rackreaver@gmail.com>"]
 
 [tool.poetry.scripts]
-finpack = 'finpack.cli:main'
+finpack = 'finpack.core.cli:main'
 
 [tool.poetry.dependencies]
 python = "^3.9"
