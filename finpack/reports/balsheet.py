@@ -46,7 +46,20 @@ class BalanceSheet:
 
         return cat
 
-    def build(self, levels=3):
+    def build(self, date, levels=3):
+        """Build balance sheet
+
+        args:
+            data (list): data from loader
+            TODO: date (datetime): date in datetime format
+        kwargs:
+            level (int): [default: 3]
+                    1: Categories
+                    2: Categories + Sub-categories
+                    3: Categories + Sub-categories + accounts
+
+        return (str): Balance Sheet
+        """
         # TODO: Dynamic tabbing needs to be added for levels 1 and 2. Not required for levels 3.
         # TODO: GH-#1 - Allow for date specific balance sheets
         data_export = {
@@ -150,12 +163,3 @@ class BalanceSheet:
         export_str += data_export["net_worth"]["str"]
 
         return export_str
-
-
-if __name__ == "__main__":
-    from finpack.core import importer
-
-    data = importer("data.csv")
-    sheet = BalanceSheet(data)
-
-    print(sheet.build(levels=1))
