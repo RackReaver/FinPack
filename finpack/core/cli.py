@@ -31,14 +31,14 @@ Options:
 __copyright__ = "Copyright (C) 2021  Matt Ferreira"
 
 from docopt import docopt
+from importlib import metadata
+
 from finpack.core import init, loader
 from finpack.reports import balsheet
 
-VERSION = open("finpack/VERSION").read().strip()
-
 
 def main():
-    args = docopt(__doc__, version=VERSION)
+    args = docopt(__doc__, version=metadata.version("finpack"))
 
     if args["init"]:
         init.init(
