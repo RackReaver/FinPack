@@ -42,7 +42,7 @@ def main():
 
     if args["init"]:
         init.init(
-            args["--filepath"][0],
+            args["--filepath"],
             sample_dataset=args["--sample-dataset"],
             force_overwrite=args["--overwrite"],
         )
