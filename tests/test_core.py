@@ -6,9 +6,9 @@ import os
 import unittest
 from datetime import datetime
 
-from finpack.core.models import Account
 from finpack.core.exceptions import AccountError, DataError
 from finpack.core.loader import loader
+from finpack.core.models import Account
 
 NAME = "The only Checking Account you will ever need"
 TYPE = "asset"
@@ -86,8 +86,8 @@ class TestCore(unittest.TestCase):
     def test_eq(self):
         self.assertTrue(self.account == TYPE.lower() + " " + NAME)
 
-    def test_current_value(self):
-        self.assertEqual(self.account.current_value(), "2000.00")
+    def test_value(self):
+        self.assertEqual(self.account.value(datetime(2021, 12, 1)), "2000.00")
 
     def test_add_value(self):
         temp = self.account.add_value(3000, date=datetime(2021, 2, 1))

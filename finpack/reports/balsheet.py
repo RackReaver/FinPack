@@ -2,6 +2,8 @@
 """
 __copyright__ = "Copyright (C) 2021 Matt Ferreira"
 
+from datetime import datetime
+
 from finpack.utils import _add_char
 
 
@@ -10,12 +12,19 @@ class BalanceSheet:
         self._data = data
         self.WIDTH = 70
         self.TAB = 5
-        self.categories = self._build_categories()
+        self.categories = self._build_categories(datetime.now())
 
     def _build_title(self, title, char="="):
         return "{0}\n{1}\n{0}".format(_add_char(self.WIDTH, char), title)
 
-    def _build_categories(self):
+    def _build_categories(self, date):
+        """Builds categories and category totals to sort accounts
+
+        kwargs:
+            date (datetime): As of date to building balance sheet.
+
+        return (dict): Nested categories with type and value
+        """
         cat = {}
         for acct in self._data:
             if acct.type == "asset" or acct.type == "liability":
@@ -31,10 +40,10 @@ class BalanceSheet:
                     cat[acct.category]["sub_categories"][acct.sub_category] = 0.00
 
                 # Add account value to category total value
-                cat[acct.category]["value"] += float(acct.current_value())
+                cat[acct.category]["value"] += float(acct.value(date))
                 # Add account value to sub_category total value
                 cat[acct.category]["sub_categories"][acct.sub_category] += float(
-                    acct.current_value()
+                    acct.value(date)
                 )
 
                 # Round category total value
@@ -50,8 +59,7 @@ class BalanceSheet:
         """Build balance sheet
 
         args:
-            data (list): data from loader
-            TODO: date (datetime): date in datetime format
+            date (datetime): As of date to building balance sheet.
         kwargs:
             level (int): [default: 3]
                     1: Categories
@@ -61,14 +69,13 @@ class BalanceSheet:
         return (str): Balance Sheet
         """
         # TODO: Dynamic tabbing needs to be added for levels 1 and 2. Not required for levels 3.
-        # TODO: GH-#1 - Allow for date specific balance sheets
         data_export = {
             "assets": {"str": self._build_title("Assets"), "total": 0.00},
             "liabilities": {"str": self._build_title("Liabilities"), "total": 0.00},
             "net_worth": {"str": "", "total": 0.00},
         }
 
-        categories = self._build_categories()
+        categories = self._build_categories(date)
 
         # Loop through categories
         for cat, data in categories.items():
@@ -108,7 +115,7 @@ class BalanceSheet:
                 if levels >= 3:
                     # Looping through accounts
                     for account in self._data:
-                        value = "{:,.2f}".format(float(account.current_value()))
+                        value = "{:,.2f}".format(float(account.value(date)))
                         calc = (
                             self.WIDTH
                             - (self.TAB * 2)

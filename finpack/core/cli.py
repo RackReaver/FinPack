@@ -30,10 +30,12 @@ Options:
 """
 __copyright__ = "Copyright (C) 2021  Matt Ferreira"
 
-from docopt import docopt
+from datetime import datetime
 from importlib import metadata
 
-from finpack.core import init, loader
+from docopt import docopt
+
+from finpack.core import exceptions, init, loader
 from finpack.reports import balsheet
 
 
@@ -49,8 +51,19 @@ def main():
     elif args["balsheet"]:
         data = loader.loader(args["--filepath"])
 
+        # Convert str to datetime
+        if args["--date"] == "today":
+            balsheet_date = datetime.now()
+        else:
+            try:
+                balsheet_date = datetime.strptime(args["--date"], "%Y-%m-%d")
+            except TypeError:
+                raise exceptions.DataError(
+                    "Date format is incorrect, please use YYYY-MM-DD. For more information see the documentation."
+                )
+
         print(
             balsheet.BalanceSheet(data).build(
-                args["--date"], levels=int(args["--levels"])
+                balsheet_date, levels=int(args["--levels"])
             )
         )
