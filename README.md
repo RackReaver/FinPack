@@ -48,7 +48,7 @@ $ poetry run pytest -v --cov
 This package can be installed with the following command:
 
 ```
-pip install git+github.com/RackReaver/finpack.git
+pip install finpack
 ```
 
 ## How To Use
@@ -59,12 +59,12 @@ pip install git+github.com/RackReaver/finpack.git
  | |__   _ _ __ | |__) |_ _  ___| | __
  |  __| | | '_ \|  ___/ _` |/ __| |/ /
  | |    | | | | | |  | (_| | (__|   <
- |_|    |_|_| |_|_|   \__,_|\___|_|\_\\
+ |_|    |_|_| |_|_|   \__,_|\___|_|\_\
 
 Super simple personal finance tracking/management tools.
 
 Commands:
-    init        Generate sample accounts.yaml file
+    init        Generate boilerplate data.csv
     balsheet    Outputs balance sheet to terminal
 
 Usage:
