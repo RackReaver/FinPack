@@ -21,7 +21,7 @@ setup(
     name="finpack",
     version=version,
     py_modules=["finpack"],
-    description="Super simple financial tracking and management tools.",
+    description="Super simple personal finance tracking.",
     long_description=README,
     license="Apache License",
     author="Matt Ferreira",

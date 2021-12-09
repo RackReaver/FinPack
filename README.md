@@ -2,7 +2,7 @@
 
 # Personal Finance Package (FinPack)
 
-Super simple personal finance tracking/management tools.
+Super simple personal finance tracking.
 
 Build balance sheets and cashflow statements.
 
