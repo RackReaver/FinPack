@@ -30,11 +30,12 @@ Options:
 """
 __copyright__ = "Copyright (C) 2021  Matt Ferreira"
 
-from docopt import docopt
 from datetime import datetime
 from importlib import metadata
 
-from finpack.core import init, loader, exceptions
+from docopt import docopt
+
+from finpack.core import exceptions, init, loader
 from finpack.reports import balsheet
 
 

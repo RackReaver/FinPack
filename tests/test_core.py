@@ -6,9 +6,9 @@ import os
 import unittest
 from datetime import datetime
 
-from finpack.core.models import Account
 from finpack.core.exceptions import AccountError, DataError
 from finpack.core.loader import loader
+from finpack.core.models import Account
 
 NAME = "The only Checking Account you will ever need"
 TYPE = "asset"
