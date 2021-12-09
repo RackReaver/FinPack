@@ -50,7 +50,6 @@ class BalanceSheet:
         """Build balance sheet
 
         args:
-            data (list): data from loader
             TODO: date (datetime): date in datetime format
         kwargs:
             level (int): [default: 3]
