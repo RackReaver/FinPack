@@ -26,19 +26,17 @@ class Account:
     def __eq__(self, other):
         return " ".join([self.type, self.name]) == other
 
-    def current_value(self):
+    def value(self, date):
         """Get latest monetary value of account.
+
+        args:
+            date (datetime): [default: None] As of date to get account value.
 
         return (str): Monetary value
         """
-        first = True
         for val in self.history:
-            if first == True:
+            if val[0] <= date.strftime("%Y-%m-%d"):
                 value = val
-                first = False
-            else:
-                if val[0] > value[0]:
-                    value = val
 
         return value[1]
 
