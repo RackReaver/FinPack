@@ -48,7 +48,7 @@ $ poetry run pytest -v --cov
 This package can be installed with the following command:
 
 ```
-pip install git+github.com/RackReaver/finpack.git
+pip install finpack
 ```
 
 ## How To Use
