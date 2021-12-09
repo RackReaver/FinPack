@@ -79,6 +79,7 @@ class Account:
         # Verify date value does not exist
         if date not in [x[0] for x in self.history]:
             self.history.append([date, "{:.2f}".format(value)])
+            self.history.sort()
 
         else:
             # TODO: Prompt to overwrite and allow for auto overwrite.
