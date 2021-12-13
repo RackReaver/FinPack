@@ -10,6 +10,10 @@ Chart your net worth, asset allocation, financial independence trajectory and mu
 
 ---
 
+## Demo
+
+![Demo gif](demo.gif)
+
 ## Table of Contents
 
 - [Installation](#installation-for-development)
