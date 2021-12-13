@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "finpack"
-version = "0.1.2"
+version = "0.2.0"
 description = "Super simple financial tracking."
 authors = ["rackreaver <rackreaver@gmail.com>"]
 
