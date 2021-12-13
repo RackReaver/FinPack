@@ -69,12 +69,12 @@ jobs:
       # run test suite ubuntu/macOS
       #----------------------------------------------
       - name: Run tests and check coverage (ubuntu/macOS)
-        if: ${{runner.os}} != "Windows"
+        if: ${{runner.os}} != 'Windows'
         run: |
           source .venv/bin/activate
           poetry run pytest -v
       - name: Run tests and check coverage (Windows)
-        if: ${{runner.os}} == "Windows"
+        if: ${{runner.os}} == 'Windows'
         run: |
           source ./venv/Scripts/activate
           poetry run pytest -v
