@@ -39,11 +39,13 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install poetry
       - name: Cache Python Packages
+        id: cache-python-packages
         uses: actions/cache@v2
         with:
           path: ${{ env.pythonLocation }}
           key: ${{ env.pythonLocation }}-${{ hashFiles('poetry.lock') }}-${{ hashFiles('pyproject.toml') }}
       - name: Install dependencies
+        if: steps.cache-python-packages.output.cache-hit != 'true'
         shell: bash
         run: |
           python -m poetry install
