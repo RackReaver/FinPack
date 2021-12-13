@@ -2,7 +2,15 @@
 name = "finpack"
 version = "0.2.0"
 description = "Super simple financial tracking."
+license = "Apache-2.0"
 authors = ["rackreaver <rackreaver@gmail.com>"]
+
+readme = "README.md"  # Markdown files are supported
+
+repository = "https://github.com/RackReaver/FinPack"
+homepage = "https://github.com/RackReaver/FinPack"
+
+keywords = ["python", "personal-finance", "finance", "financial", "personal-finances", "balance-sheet", "personal-finance-manager", "cashflow-management"]
 
 [tool.poetry.scripts]
 finpack = 'finpack.core.cli:main'
