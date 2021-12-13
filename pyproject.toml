@@ -2,6 +2,7 @@
 name = "finpack"
 version = "0.2.0"
 description = "Super simple financial tracking."
+license = "Apache-2.0"
 authors = ["rackreaver <rackreaver@gmail.com>"]
 
 [tool.poetry.scripts]
