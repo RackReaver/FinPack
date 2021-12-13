@@ -45,7 +45,7 @@ jobs:
           path: ${{ env.pythonLocation }}
           key: ${{ env.pythonLocation }}-${{ hashFiles('poetry.lock') }}-${{ hashFiles('pyproject.toml') }}
       - name: Install dependencies
-        if: steps.cache-python-packages.output.cache-hit != 'true'
+        if: steps.cache-python-packages.outputs.cache-hit != 'true'
         shell: bash
         run: |
           python -m poetry install
