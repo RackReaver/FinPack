@@ -76,5 +76,5 @@ jobs:
       - name: Run tests and check coverage (Windows)
         if: runner.os == 'Windows'
         run: |
-          source ./venv/Scripts/activate.bat
+          ./venv/Scripts/activate.bat
           poetry run pytest -v
