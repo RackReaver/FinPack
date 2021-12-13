@@ -19,11 +19,12 @@ HISTORY = [["2021-01-01", "1000.00"], ["2021-12-01", "2000.00"]]
 
 
 class TestCore(unittest.TestCase):
-    def setUp(self):
-        self.DATA_DIR = "temp"
-        self.DATA = self.DATA_DIR + "/data.csv"
-        self.BROKEN_DATA = self.DATA_DIR + "/broken_data.csv"
-        self.account = Account(
+    @classmethod
+    def setUpClass(cls):
+        cls.DATA_DIR = "temp"
+        cls.DATA = cls.DATA_DIR + "/data.csv"
+        cls.BROKEN_DATA = cls.DATA_DIR + "/broken_data.csv"
+        cls.account = Account(
             NAME,
             TYPE,
             CATEGORY,
@@ -32,15 +33,15 @@ class TestCore(unittest.TestCase):
             HISTORY,
         )
 
-        os.mkdir(self.DATA_DIR)
-        with open(self.DATA, "w") as openFile:
+        os.mkdir(cls.DATA_DIR)
+        with open(cls.DATA, "w") as openFile:
             openFile.write(
                 "name,type,category,sub_category,description,2021-01-01,2021-12-01\n"
             )
             openFile.write(
                 "Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00"
             )
-        with open(self.BROKEN_DATA, "w") as openFile:
+        with open(cls.BROKEN_DATA, "w") as openFile:
             openFile.write(
                 "name,type,category,sub_category,description,2021-01-01,2021-12-01\n"
             )
@@ -51,10 +52,11 @@ class TestCore(unittest.TestCase):
                 "Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00\n"
             )
 
-    def tearDown(self):
-        os.remove(self.DATA)
-        os.remove(self.BROKEN_DATA)
-        os.rmdir(self.DATA_DIR)
+    @classmethod
+    def tearDownClass(cls):
+        os.remove(cls.DATA)
+        os.remove(cls.BROKEN_DATA)
+        os.rmdir(cls.DATA_DIR)
 
     def test_account_name(self):
         self.assertEqual(self.account.name, NAME)
