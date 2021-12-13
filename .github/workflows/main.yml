@@ -28,13 +28,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       #----------------------------------------------
-      #       check-out repo
+      #       check-out repo and set-up python
       #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v1
-      #----------------------------------------------
-      #       set-up python
-      #----------------------------------------------
       - name: Set up python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
@@ -48,7 +45,6 @@ jobs:
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
-          installer-parallel: true
       #----------------------------------------------
       #       load cached venv if cache exists
       #----------------------------------------------
@@ -70,9 +66,14 @@ jobs:
       - name: Install library
         run: poetry install --no-interaction
       #----------------------------------------------
-      #              run test suite
+      # run test suite ubuntu/macOS
       #----------------------------------------------
-      - name: Run tests and check coverage
+      - name: Run tests and check coverage (ubuntu/macOS)
+        if: runner.os != "Windows"
         run: |
           source .venv/bin/activate
+          poetry run pytest -v
+      - name: Run tests and check coverage (Windows)
+        run: |
+          source ./venv/Scripts/activate
           poetry run pytest -v
