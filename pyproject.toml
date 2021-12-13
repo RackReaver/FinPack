@@ -5,6 +5,8 @@ description = "Super simple financial tracking."
 license = "Apache-2.0"
 authors = ["rackreaver <rackreaver@gmail.com>"]
 
+readme = "README.md"  # Markdown files are supported
+
 [tool.poetry.scripts]
 finpack = 'finpack.core.cli:main'
 
