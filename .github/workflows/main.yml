@@ -80,10 +80,5 @@ jobs:
       #               run test suite
       #----------------------------------------------
       - run: |
-          source .venv/scripts/activate
+          source \$VENV
           poetry run pytest -v
-        if: runner.os == 'Windows'
-      - run: |
-          source .venv/bin/activate
-          poetry run pytest -v
-        if: runner.os != 'Windows'
