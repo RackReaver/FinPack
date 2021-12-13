@@ -15,20 +15,11 @@ class TestCli(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.DATA_DIR = "temp"
-        cls.DATA = cls.DATA_DIR + "/data.csv"
 
         os.mkdir(cls.DATA_DIR)
-        with open(cls.DATA, "w") as openFile:
-            openFile.write(
-                "name,type,category,sub_category,description,2021-01-01,2021-12-01\n"
-            )
-            openFile.write(
-                "Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00"
-            )
 
     @classmethod
     def tearDownClass(cls):
-        os.remove(cls.DATA)
         os.rmdir(cls.DATA_DIR)
 
     def test_version_option(self):
