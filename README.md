@@ -137,7 +137,7 @@ This is an example print out of what `finpack init --sample-dataset` will output
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](#) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTE](CONTRIBUTE.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
