@@ -7,6 +7,9 @@ authors = ["rackreaver <rackreaver@gmail.com>"]
 
 readme = "README.md"  # Markdown files are supported
 
+repository = "https://github.com/RackReaver/FinPack"
+homepage = "https://github.com/RackReaver/FinPack"
+
 [tool.poetry.scripts]
 finpack = 'finpack.core.cli:main'
 
