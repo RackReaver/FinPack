@@ -80,5 +80,5 @@ jobs:
       #               run test suite
       #----------------------------------------------
       - run: |
-          source .venv/scripts/activate
+          source .venv/bin/activate
           poetry run pytest -v
