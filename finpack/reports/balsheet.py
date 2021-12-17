@@ -112,33 +112,39 @@ class BalanceSheet:
                             _add_char(self.TAB), s_cat, _add_char(calc), value
                         )
 
-                if levels >= 3:
-                    # Looping through accounts
-                    for account in self._data:
-                        value = "{:,.2f}".format(float(account.value(date)))
-                        calc = (
-                            self.WIDTH
-                            - (self.TAB * 2)
-                            - len(account.short_name)
-                            - len(str(value))
-                        )
-                        if account.type == "asset" and account.sub_category == s_cat:
-                            data_export["assets"]["str"] += "\n{}{}{}{}".format(
-                                _add_char(self.TAB * 2),
-                                account.short_name,
-                                _add_char(calc),
-                                value,
+                    if levels >= 3:
+                        # Looping through accounts
+                        for account in self._data:
+                            value = "{:,.2f}".format(float(account.value(date)))
+                            calc = (
+                                self.WIDTH
+                                - (self.TAB * 2)
+                                - len(account.short_name)
+                                - len(str(value))
                             )
-                        elif (
-                            account.type == "liability"
-                            and account.sub_category == s_cat
-                        ):
-                            data_export["liabilities"]["str"] += "\n{}{}{}{}".format(
-                                _add_char(self.TAB * 2),
-                                account.short_name,
-                                _add_char(calc),
-                                value,
-                            )
+
+                            if (
+                                account.type == "asset"
+                                and account.sub_category == s_cat
+                            ):
+                                data_export["assets"]["str"] += "\n{}{}{}{}".format(
+                                    _add_char(self.TAB * 2),
+                                    account.short_name,
+                                    _add_char(calc),
+                                    value,
+                                )
+                            elif (
+                                account.type == "liability"
+                                and account.sub_category == s_cat
+                            ):
+                                data_export["liabilities"][
+                                    "str"
+                                ] += "\n{}{}{}{}".format(
+                                    _add_char(self.TAB * 2),
+                                    account.short_name,
+                                    _add_char(calc),
+                                    value,
+                                )
 
         total_asset_title = "OVERALL TOTAL ASSETS"
         value = "{:,.2f}".format(data_export["assets"]["total"])
