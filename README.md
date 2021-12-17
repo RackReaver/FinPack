@@ -1,4 +1,4 @@
-![Alt text](logo.png?raw=true "logo")
+![Alt text](https://github.com/RackReaver/FinPack/raw/main/logo.png?raw=true)
 
 # Personal Finance Package (FinPack)
 
@@ -12,7 +12,7 @@ Chart your net worth, asset allocation, financial independence trajectory and mu
 
 ## Demo
 
-![Demo gif](demo.gif)
+![Demo gif](https://github.com/RackReaver/FinPack/raw/main/demo.gif)
 
 ## Table of Contents
 
