@@ -39,16 +39,16 @@ def loader(filepath):
                 if x[0] not in ignore and x[1].replace(" ", "") is not "":
                     data.append([x[0], x[1].replace(",", "")])
 
-            # Add account to accounts list
-            accounts.append(
-                Account(
-                    name=row["name"],
-                    type=row["type"],
-                    category=row["category"],
-                    sub_category=row["sub_category"],
-                    description=row["description"],
-                    history=data,
+            if data:
+                accounts.append(
+                    Account(
+                        name=row["name"],
+                        type=row["type"],
+                        category=row["category"],
+                        sub_category=row["sub_category"],
+                        description=row["description"],
+                        history=data,
+                    )
                 )
-            )
     logging.info("Completed running finpack.core.loader:loader")
     return accounts
