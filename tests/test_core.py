@@ -111,7 +111,7 @@ class TestCore(unittest.TestCase):
             self.account.add_value(3000, date=datetime(2021, 1, 1))
 
     def test_loader_data(self):
-        data = loader(self.DATA, header=True)
+        data = loader(self.DATA)
         self.assertAlmostEqual(data[0].name, "Checking 1")
 
     def test_loader_broken_data(self):
