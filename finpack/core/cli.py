@@ -13,8 +13,8 @@ Commands:
     balsheet    Outputs balance sheet to terminal
 
 Usage:
-    finpack init [--filepath=filepath] [--sample-dataset] [--overwrite]
-    finpack balsheet [--filepath=filepath] [--levels=level] [--date=date]
+    finpack init [--filepath=filepath] [--sample-dataset] [--overwrite] [--verbose]
+    finpack balsheet [--filepath=filepath] [--levels=level] [--date=date] [--verbose]
     finpack (--version | --help | -h)
 
 Options:
@@ -25,11 +25,14 @@ Options:
                                     3 Categories + Sub-categories + accounts
     --overwrite                 Write over existing file
     --date=date                 Custom date to build report (YYYY-MM-DD) [default: today]
+    --verbose                   Display error, debug and info logs to the terminal
     -v --version                Display installed version
     -h --help                   Show available commands
 """
 __copyright__ = "Copyright (C) 2021  Matt Ferreira"
 
+import logging
+import sys
 from datetime import datetime
 from importlib import metadata
 
@@ -41,6 +44,14 @@ from finpack.reports import balsheet
 
 def main():
     args = docopt(__doc__, version=metadata.version("finpack"))
+
+    if args["--verbose"]:
+        logging.basicConfig(
+            stream=sys.stdout,
+            level=logging.DEBUG,
+            filemode="w",
+            format="%(levelname)s: %(message)s",
+        )
 
     if args["init"]:
         init.init(
