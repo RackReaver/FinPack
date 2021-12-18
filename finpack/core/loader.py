@@ -39,7 +39,6 @@ def loader(filepath):
                 if x[0] not in ignore and x[1].replace(" ", "") is not "":
                     data.append([x[0], x[1].replace(",", "")])
 
-            # Add account to accounts list
             if data:
                 accounts.append(
                     Account(
