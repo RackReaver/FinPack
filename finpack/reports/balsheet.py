@@ -4,7 +4,7 @@ __copyright__ = "Copyright (C) 2021 Matt Ferreira"
 
 from datetime import datetime
 
-from finpack.utils import _add_char
+from finpack.utils import add_char
 
 
 class BalanceSheet:
@@ -15,7 +15,7 @@ class BalanceSheet:
         self.categories = self._build_categories(datetime.now())
 
     def _build_title(self, title, char="="):
-        return "{0}\n{1}\n{0}".format(_add_char(self.WIDTH, char), title)
+        return "{0}\n{1}\n{0}".format(add_char(self.WIDTH, char), title)
 
     def _build_categories(self, date):
         """Builds categories and category totals to sort accounts
@@ -86,12 +86,12 @@ class BalanceSheet:
             if data["type"] == "asset":
                 data_export["assets"]["total"] += data["value"]
                 data_export["assets"]["str"] += "\n{}{}{}".format(
-                    cat, _add_char(calc), value
+                    cat, add_char(calc), value
                 )
             elif data["type"] == "liability":
                 data_export["liabilities"]["total"] += data["value"]
                 data_export["liabilities"]["str"] += "\n{}{}{}".format(
-                    cat, _add_char(calc), value
+                    cat, add_char(calc), value
                 )
 
             if levels >= 2:
@@ -105,11 +105,11 @@ class BalanceSheet:
 
                     if data["type"] == "asset":
                         data_export["assets"]["str"] += "\n{}{}{}{}".format(
-                            _add_char(self.TAB), s_cat, _add_char(calc), value
+                            add_char(self.TAB), s_cat, add_char(calc), value
                         )
                     elif data["type"] == "liability":
                         data_export["liabilities"]["str"] += "\n{}{}{}{}".format(
-                            _add_char(self.TAB), s_cat, _add_char(calc), value
+                            add_char(self.TAB), s_cat, add_char(calc), value
                         )
 
                     if levels >= 3:
@@ -128,9 +128,9 @@ class BalanceSheet:
                                 and account.sub_category == s_cat
                             ):
                                 data_export["assets"]["str"] += "\n{}{}{}{}".format(
-                                    _add_char(self.TAB * 2),
+                                    add_char(self.TAB * 2),
                                     account.short_name,
-                                    _add_char(calc),
+                                    add_char(calc),
                                     value,
                                 )
                             elif (
@@ -140,9 +140,9 @@ class BalanceSheet:
                                 data_export["liabilities"][
                                     "str"
                                 ] += "\n{}{}{}{}".format(
-                                    _add_char(self.TAB * 2),
+                                    add_char(self.TAB * 2),
                                     account.short_name,
-                                    _add_char(calc),
+                                    add_char(calc),
                                     value,
                                 )
 
@@ -150,14 +150,14 @@ class BalanceSheet:
         value = "{:,.2f}".format(data_export["assets"]["total"])
         calc = self.WIDTH - len(total_asset_title) - len(str(value))
         data_export["assets"]["str"] += "\n{}{}{}".format(
-            total_asset_title, _add_char(calc), value
+            total_asset_title, add_char(calc), value
         )
 
         total_liability_title = "OVERALL TOTAL LIABILITIES"
         value = "{:,.2f}".format(data_export["liabilities"]["total"])
         calc = self.WIDTH - len(total_liability_title) - len(str(value))
         data_export["liabilities"]["str"] += "\n{}{}{}".format(
-            total_liability_title, _add_char(calc), value
+            total_liability_title, add_char(calc), value
         )
 
         net_worth_title = "NET WORTH"
@@ -166,7 +166,7 @@ class BalanceSheet:
         )
         calc = self.WIDTH - len(net_worth_title) - len(net_worth)
         pre_build_net_worth_str = "{}{}{}".format(
-            net_worth_title, _add_char(calc), net_worth
+            net_worth_title, add_char(calc), net_worth
         )
         data_export["net_worth"]["str"] = self._build_title(pre_build_net_worth_str)
         data_export["net_worth"]["total"] = net_worth
