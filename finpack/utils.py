@@ -3,7 +3,7 @@
 __copyright__ = "Copyright (C) 2021 Matt Ferreira"
 
 
-def _add_char(num, char=" "):
+def add_char(num, char=" "):
     """Creates a string value give a number and character.
     args:
         num (int): Amount to repeat character
