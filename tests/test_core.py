@@ -89,7 +89,7 @@ class TestCore(unittest.TestCase):
         self.assertTrue(self.account == TYPE.lower() + " " + NAME)
 
     def test_value(self):
-        self.assertEqual(self.account.value(datetime(2021, 12, 1)), "2000.00")
+        self.assertEqual(self.account.value(datetime(2021, 12, 1)), 2000.00)
 
     def test_add_value(self):
         temp = self.account.add_value(3000, date=datetime(2021, 2, 1))
