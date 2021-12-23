@@ -32,13 +32,13 @@ class Account:
         args:
             date (datetime): [default: None] As of date to get account value.
 
-        return (str): Monetary value
+        return (float): Monetary value
         """
         for val in self.history:
             if val[0] <= date.strftime("%Y-%m-%d"):
                 value = val
 
-        return value[1]
+        return float(value[1])
 
     def add_value(self, value, date=datetime.now()):
         """
