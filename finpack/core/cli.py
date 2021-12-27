@@ -38,7 +38,7 @@ from importlib import metadata
 
 from docopt import docopt
 
-from finpack.core import exceptions, init, loader
+from finpack.core import exceptions, init, loader, models
 from finpack.reports import balsheet
 
 
@@ -60,8 +60,6 @@ def main():
             force_overwrite=args["--overwrite"],
         )
     elif args["balsheet"]:
-        data = loader.loader(args["--filepath"])
-
         # Convert str to datetime
         if args["--date"] == "today":
             balsheet_date = datetime.now()
@@ -72,9 +70,10 @@ def main():
                 raise exceptions.DataError(
                     "Date format is incorrect, please use YYYY-MM-DD. For more information see the documentation."
                 )
+        accounts = loader.loader(args["--filepath"], balsheet_date)
 
         print(
-            balsheet.BalanceSheet(data).build(
+            balsheet.BalanceSheet(accounts).build(
                 balsheet_date, levels=int(args["--levels"])
             )
         )

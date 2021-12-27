@@ -2,18 +2,17 @@
 """
 __copyright__ = "Copyright (C) 2021 Matt Ferreira"
 
+from dataclasses import dataclass, field
 from datetime import datetime
+from os import stat
 
 from finpack.core.exceptions import AccountError, DataError
 
 
 class Account:
-    def __init__(self, name, type, category, sub_category, description, history):
+    def __init__(self, name, description, history):
         self.name = name
         self.short_name = name[:40]
-        self.type = type.lower()
-        self.category = category
-        self.sub_category = sub_category
         self.description = description
         self.history = history
 
@@ -21,10 +20,7 @@ class Account:
             self.short_name = name[:37] + "..."
 
     def __repr__(self):
-        return "<Account." + self.type + "." + self.name.replace(" ", "-") + ">"
-
-    def __eq__(self, other):
-        return " ".join([self.type, self.name]) == other
+        return self.name
 
     def value(self, date):
         """Get latest monetary value of account.
@@ -84,3 +80,105 @@ class Account:
             raise AccountError("Date value already exists")
 
         return True
+
+
+@dataclass
+class SubCategory:
+    name: str
+    current_value: float = 0.00
+    current_percentage_value: int = field(default=0, repr=False)
+    value: float = field(default=0.00, repr=False)
+    percentage_value: int = field(default=0, repr=False)
+    accounts: list = field(init=False, default_factory=list, repr=False)
+
+    def __iter__(self):
+        return iter(self.accounts)
+
+    def add(self, account: Account):
+        self.accounts.append(account)
+        self.current_value += round(account.value(datetime.now()), 2)
+        return True
+
+
+@dataclass
+class Category:
+    name: str
+    current_value: float = 0.00
+    current_percentage_value: int = field(default=0, repr=False)
+    value: float = field(default=0.00, repr=False)
+    percentage_value: int = field(default=0, repr=False)
+    sub_categories: list = field(init=False, default_factory=list, repr=False)
+
+    def __str__(self):
+        return self.name
+
+    def __iter__(self):
+        return iter(self.sub_categories)
+
+    def add(self, sub_category: SubCategory):
+        self.sub_categories.append(sub_category)
+        self.current_value += round(sub_category.current_value, 2)
+        return True
+
+
+@dataclass
+class RootType:
+    current_value: float = 0.00
+    current_percentage_value: int = field(default=0, repr=False)
+    value: float = field(default=0.00, repr=False)
+    percentage_value: int = field(default=0, repr=False)
+    categories: list = field(init=False, default_factory=list, repr=False)
+
+    def __iter__(self):
+        return iter(self.categories)
+
+    def add(self, category: Category):
+        self.categories.append(category)
+        self.current_value += round(category.current_value, 2)
+
+
+@dataclass
+class File:
+    filename: str
+    data: dict = field(init=False, repr=False)
+
+    def __post_init__(self):
+        self.data = {
+            "assets": RootType(),
+            "liabilities": RootType(),
+            "incomes": RootType(),
+            "expenses": RootType(),
+        }
+
+    def __getitem__(self, key):
+        return self.data[self._pluralize(key)]
+
+    @staticmethod
+    def _pluralize(root_type):
+        if root_type == "asset":
+            return "assets"
+        if root_type == "liability":
+            return "liabilities"
+        if root_type == "income":
+            return "incomes"
+        if root_type == "expense":
+            return "expenses"
+        else:
+            raise DataError(f"Unable to pluralize '{root_type}'")
+
+    def check(self, name: str, root_type: str):
+        for cat in self.data[self._pluralize(root_type)]:
+            for sub_cat in cat:
+                if name in sub_cat:
+                    return True
+        return False
+
+    def add(self, category: Category, root_type: str):
+        self.data[self._pluralize(root_type)].add(category)
+
+    def calculate(self, date):
+        # TODO: This function should compute and populate:
+        # - current_percentage_value
+        # - value
+        # - percentage_value
+        pass
