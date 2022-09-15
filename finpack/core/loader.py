@@ -4,18 +4,19 @@ __copyright__ = "Copyright (C) 2021 Matt Ferreira"
 
 import csv
 import logging
+from typing import List
 
 from finpack.core.exceptions import DataError
 from finpack.core.models import Account
 
 
-def loader(filepath):
+def loader(filepath: str) -> List[Account]:
     """Import chart of accounts from CSV file.
 
     args:
         filepath (str): Location of CSV file.
 
-    return (dict): Account classes
+    return (list): Account classes
     """
     logging.info("Running finpack.core.loader:loader")
     accounts = []
