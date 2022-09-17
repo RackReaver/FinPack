@@ -8,10 +8,10 @@ from finpack.core.exceptions import AccountError, DataError
 
 
 class Account:
-    def __init__(self, name, type, category, sub_category, description, history):
+    def __init__(self, name, group, category, sub_category, description, history):
         self.name = name
         self.short_name = name[:40]
-        self.type = type.lower()
+        self.group = group.lower()
         self.category = category
         self.sub_category = sub_category
         self.description = description
@@ -21,10 +21,10 @@ class Account:
             self.short_name = name[:37] + "..."
 
     def __repr__(self):
-        return "<Account." + self.type + "." + self.name.replace(" ", "-") + ">"
+        return "<Account." + self.group + "." + self.name.replace(" ", "-") + ">"
 
     def __eq__(self, other):
-        return " ".join([self.type, self.name]) == other
+        return " ".join([self.group, self.name]) == other
 
     def value(self, date):
         """Get latest monetary value of account.

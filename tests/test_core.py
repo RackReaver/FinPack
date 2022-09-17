@@ -65,7 +65,7 @@ class TestCore(unittest.TestCase):
         self.assertEqual(self.account.short_name, NAME[:37] + "...")
 
     def test_account_type(self):
-        self.assertEqual(self.account.type, TYPE)
+        self.assertEqual(self.account.group, TYPE)
 
     def test_account_category(self):
         self.assertEqual(self.account.category, CATEGORY)

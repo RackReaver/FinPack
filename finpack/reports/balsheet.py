@@ -27,11 +27,11 @@ class BalanceSheet:
         """
         cat = {}
         for acct in self._data:
-            if acct.type == "asset" or acct.type == "liability":
+            if acct.group == "asset" or acct.group == "liability":
                 # Check if category has been added
                 if acct.category not in cat:
                     cat[acct.category] = {
-                        "type": acct.type,
+                        "type": acct.group,
                         "value": 0.00,
                         "sub_categories": {},
                     }
@@ -124,7 +124,7 @@ class BalanceSheet:
                             )
 
                             if (
-                                account.type == "asset"
+                                account.group == "asset"
                                 and account.sub_category == s_cat
                             ):
                                 data_export["assets"]["str"] += "\n{}{}{}{}".format(
@@ -134,7 +134,7 @@ class BalanceSheet:
                                     value,
                                 )
                             elif (
-                                account.type == "liability"
+                                account.group == "liability"
                                 and account.sub_category == s_cat
                             ):
                                 data_export["liabilities"][

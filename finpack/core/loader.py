@@ -44,7 +44,7 @@ def loader(filepath: str) -> List[Account]:
                 accounts.append(
                     Account(
                         name=row["name"],
-                        type=row["type"],
+                        group=row["type"],
                         category=row["category"],
                         sub_category=row["sub_category"],
                         description=row["description"],
