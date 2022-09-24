@@ -24,17 +24,17 @@ def loader(filepath: str) -> List[Account]:
     with open(filepath, "r") as openFile:
         logging.debug("Looping through rows in CSV file.")
         for num, row in enumerate(csv.DictReader(openFile)):
-            if row["name"] == "" or row["type"] == "":
-                logging.debug(f"Skipping row {num} because name or type was blank.")
+            if row["name"] == "" or row["group"] == "":
+                logging.debug(f"Skipping row {num} because name or group was blank.")
                 break
-            if " ".join([row["type"], row["name"]]) in accounts:
+            if " ".join([row["group"], row["name"]]) in accounts:
                 raise DataError(
-                    "Account names must be unique if same type, '{}' is duplicated.".format(
+                    "Account names must be unique if same group, '{}' is duplicated.".format(
                         row["name"]
                     )
                 )
 
-            ignore = ["name", "type", "category", "sub_category", "description"]
+            ignore = ["name", "group", "category", "sub_category", "description"]
             data = []
             for x in row.items():
                 if x[0] not in ignore and x[1].replace(" ", "") is not "":
@@ -44,7 +44,7 @@ def loader(filepath: str) -> List[Account]:
                 accounts.append(
                     Account(
                         name=row["name"],
-                        group=row["type"],
+                        group=row["group"],
                         category=row["category"],
                         sub_category=row["sub_category"],
                         description=row["description"],

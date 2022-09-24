@@ -19,7 +19,7 @@ def init(filepath="data.csv", sample_dataset=False, force_overwrite=False):
     """
     filepath = str(filepath).replace("\\", "/").strip()
 
-    data = "name,type,category,sub_category,description,{}".format(
+    data = "name,group,category,sub_category,description,{}".format(
         datetime.now().strftime("%Y-%m-%d")
     )
 
