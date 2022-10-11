@@ -11,7 +11,7 @@ from finpack.core.loader import loader
 from finpack.core.models import Account
 
 NAME = "The only Checking Account you will ever need"
-TYPE = "asset"
+GROUP = "asset"
 CATEGORY = "Cash and Cash Equivalents"
 SUB_CATEGORY = "Checking Accounts"
 DESCRIPTION = "Description for checking account 1"
@@ -26,7 +26,7 @@ class TestCore(unittest.TestCase):
         cls.BROKEN_DATA = cls.DATA_DIR + "/broken_data.csv"
         cls.account = Account(
             NAME,
-            TYPE,
+            GROUP,
             CATEGORY,
             SUB_CATEGORY,
             DESCRIPTION,
@@ -36,14 +36,14 @@ class TestCore(unittest.TestCase):
         os.mkdir(cls.DATA_DIR)
         with open(cls.DATA, "w") as openFile:
             openFile.write(
-                "name,type,category,sub_category,description,2021-01-01,2021-12-01\n"
+                "name,group,category,sub_category,description,2021-01-01,2021-12-01\n"
             )
             openFile.write(
                 "Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00"
             )
         with open(cls.BROKEN_DATA, "w") as openFile:
             openFile.write(
-                "name,type,category,sub_category,description,2021-01-01,2021-12-01\n"
+                "name,group,category,sub_category,description,2021-01-01,2021-12-01\n"
             )
             openFile.write(
                 "Checking 1,asset,Cash and Cash Equivalents,Checking Accounts,,1000.00,2000.00\n"
@@ -64,8 +64,8 @@ class TestCore(unittest.TestCase):
     def test_account_short_name(self):
         self.assertEqual(self.account.short_name, NAME[:37] + "...")
 
-    def test_account_type(self):
-        self.assertEqual(self.account.type, TYPE)
+    def test_account_group(self):
+        self.assertEqual(self.account.group, GROUP)
 
     def test_account_category(self):
         self.assertEqual(self.account.category, CATEGORY)
@@ -86,7 +86,7 @@ class TestCore(unittest.TestCase):
         )
 
     def test_eq(self):
-        self.assertTrue(self.account == TYPE.lower() + " " + NAME)
+        self.assertTrue(self.account == GROUP.lower() + " " + NAME)
 
     def test_value(self):
         self.assertEqual(self.account.value(datetime(2021, 12, 1)), 2000.00)

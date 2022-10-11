@@ -23,15 +23,15 @@ class BalanceSheet:
         kwargs:
             date (datetime): As of date to building balance sheet.
 
-        return (dict): Nested categories with type and value
+        return (dict): Nested categories with group and value
         """
         cat = {}
         for acct in self._data:
-            if acct.type == "asset" or acct.type == "liability":
+            if acct.group == "asset" or acct.group == "liability":
                 # Check if category has been added
                 if acct.category not in cat:
                     cat[acct.category] = {
-                        "type": acct.type,
+                        "group": acct.group,
                         "value": 0.00,
                         "sub_categories": {},
                     }
@@ -83,12 +83,12 @@ class BalanceSheet:
             value = "{:,.2f}".format(data["value"])
             calc = self.WIDTH - len(cat) - (self.TAB * 2) - len(value)
 
-            if data["type"] == "asset":
+            if data["group"] == "asset":
                 data_export["assets"]["total"] += data["value"]
                 data_export["assets"]["str"] += "\n{}{}{}".format(
                     cat, add_char(calc), value
                 )
-            elif data["type"] == "liability":
+            elif data["group"] == "liability":
                 data_export["liabilities"]["total"] += data["value"]
                 data_export["liabilities"]["str"] += "\n{}{}{}".format(
                     cat, add_char(calc), value
@@ -103,11 +103,11 @@ class BalanceSheet:
                         self.WIDTH - self.TAB - len(s_cat) - self.TAB - len(str(value))
                     )
 
-                    if data["type"] == "asset":
+                    if data["group"] == "asset":
                         data_export["assets"]["str"] += "\n{}{}{}{}".format(
                             add_char(self.TAB), s_cat, add_char(calc), value
                         )
-                    elif data["type"] == "liability":
+                    elif data["group"] == "liability":
                         data_export["liabilities"]["str"] += "\n{}{}{}{}".format(
                             add_char(self.TAB), s_cat, add_char(calc), value
                         )
@@ -124,7 +124,7 @@ class BalanceSheet:
                             )
 
                             if (
-                                account.type == "asset"
+                                account.group == "asset"
                                 and account.sub_category == s_cat
                             ):
                                 data_export["assets"]["str"] += "\n{}{}{}{}".format(
@@ -134,7 +134,7 @@ class BalanceSheet:
                                     value,
                                 )
                             elif (
-                                account.type == "liability"
+                                account.group == "liability"
                                 and account.sub_category == s_cat
                             ):
                                 data_export["liabilities"][
